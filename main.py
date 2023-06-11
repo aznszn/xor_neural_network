@@ -5,13 +5,13 @@ def sigmoid(z):
 
 if __name__ == '__main__':
     X = np.array([[0, 0, 1, 1], [0, 1, 0, 1]])
-    Y = np.array([0, 1, 1, 0])  # output as row vector
+    Y = np.array([[0, 1, 1, 0]])  # output as row vector
 
     lr = 1 #learning rate
     epochs = 1000
 
-    n_x = 2 #features in input
-    m = 4   #training samples
+    n_x = X.shape[0] #features in input
+    m = X.shape[1]   #training samples
     neurons_l1 = 2  #neurons in first layer
     neurons_l2 = 1  #neurons in output layer
 
@@ -39,7 +39,6 @@ if __name__ == '__main__':
 
         # backward pass for the first layer
         DZ1 = np.dot(W2.T, DZ2) * A1 * (1 - A1)
-        print(DZ1)
         DW1 = (1/m) * np.dot(DZ1, X.T)
         DB1 = (1/m) * np.sum(DZ1, axis=1, keepdims=True)
 
@@ -51,4 +50,4 @@ if __name__ == '__main__':
             print('epoch = ', i)
             print('loss = ', logloss)
 
-print('\nXOR neural network final predictions:\n', np.concatenate((X, A2)).T)
+    print('\nXOR neural network final predictions:\n', np.concatenate((X, A2)).T)
